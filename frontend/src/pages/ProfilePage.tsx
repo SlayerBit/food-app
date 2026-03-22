@@ -28,7 +28,7 @@ export const ProfilePage = () => {
 
   const fetchUser = async () => {
     const res = await api.get("/users/me");
-    const u = res.data?.data || [] as User & { addresses?: Address[] };
+    const u = (res.data?.data || {}) as User & { addresses?: Address[] };
     setUser(u);
     setName(u.name || "");
     setPhone(u.phone || "");
@@ -156,11 +156,11 @@ export const ProfilePage = () => {
             className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-slate-900 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-500/30"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+91 …"
+            placeholder="+91 ???"
           />
         </div>
         <button type="submit" disabled={saving} className="btn-primary">
-          {saving ? "Saving…" : "Save changes"}
+          {saving ? "Saving???" : "Save changes"}
         </button>
       </form>
 

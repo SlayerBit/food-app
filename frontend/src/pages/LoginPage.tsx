@@ -19,7 +19,8 @@ export const LoginPage = () => {
     setError("");
     try {
       const res = await api.post("/auth/login", { email, password });
-      login(res.data?.data || [].token, res.data?.data || [].user);
+      const data = res.data?.data || {};
+      login(data.token, data.user);
       navigate("/");
     } catch (err) {
       setError(getApiErrorMessage(err, "Login failed"));
@@ -46,14 +47,14 @@ export const LoginPage = () => {
           <input
             className="w-full rounded-xl border border-slate-200 px-4 py-2.5 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-500/30"
             type="password"
-            placeholder="••••••••"
+            placeholder="????????????????????????"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         {error && <p className="text-sm text-red-600">{error}</p>}
         <button type="submit" disabled={loading} className="btn-primary w-full py-3">
-          {loading ? "Signing in…" : "Login"}
+          {loading ? "Signing in???" : "Login"}
         </button>
       </form>
       <p className="mt-6 text-center text-sm text-slate-600">
