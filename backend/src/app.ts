@@ -89,7 +89,7 @@ app.get("/metrics", (req, res) => {
   );
 });
 
-app.use("/", routes);
+app.use("/api", routes);
 app.use((req, res) =>
   res
     .status(404)
