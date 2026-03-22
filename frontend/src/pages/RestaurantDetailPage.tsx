@@ -19,7 +19,7 @@ export const RestaurantDetailPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    Promise.all([api.get(`/restaurants/public/${id}`), api.get(`/menu/public/${id}`)])
+    Promise.all([api.get(`/restaurants/${id}`), api.get(`/menu/${id}`)])
       .then(([r, m]) => {
         setRestaurant(r.data.data);
         setMenu(m.data.data);

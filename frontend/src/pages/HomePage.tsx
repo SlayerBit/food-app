@@ -13,7 +13,7 @@ export const HomePage = () => {
 
   useEffect(() => {
   api
-    .get("/restaurants/public")
+    .get("/restaurants")
     .then((res) => {
       const restaurants = res.data?.data || [];
       setRestaurants(restaurants);
