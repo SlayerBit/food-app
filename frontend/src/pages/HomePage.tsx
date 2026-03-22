@@ -12,17 +12,22 @@ export const HomePage = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api
-      .get("/restaurants/public")
-      .then((res) => setRestaurants(res.data?.data || []))
-      .catch((e) => setError(getApiErrorMessage(e, "Failed to load restaurants")))
-      .finally(() => setLoading(false));
-  }, []);
+  api
+    .get("/restaurants/public")
+    .then((res) => {
+      const restaurants = res.data?.data || [];
+      setRestaurants(restaurants);
+    })
+    .catch((e) =>
+      setError(getApiErrorMessage(e, "Failed to load restaurants"))
+    )
+    .finally(() => setLoading(false));
+}, []);
 
   if (loading) return <Loading />;
   if (error) return <ErrorState message={error} />;
 
-  if (!(restaurants || [])( || []).length){
+  if (!(restaurants || []).length) {
     return (
       <div className="card mx-auto max-w-md p-10 text-center">
         <p className="text-lg font-medium text-slate-800">No restaurants yet</p>
