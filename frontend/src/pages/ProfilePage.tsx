@@ -28,7 +28,7 @@ export const ProfilePage = () => {
 
   const fetchUser = async () => {
     const res = await api.get("/users/me");
-    const u = res.data.data as User & { addresses?: Address[] };
+    const u = res.data?.data || [] as User & { addresses?: Address[] };
     setUser(u);
     setName(u.name || "");
     setPhone(u.phone || "");
@@ -166,7 +166,7 @@ export const ProfilePage = () => {
 
       <div className="card p-6">
         <h2 className="text-lg font-semibold text-slate-900">Addresses</h2>
-        {addresses.length === 0 ? (
+        {(addresses || []).length === 0 ? (
           <p className="mt-2 text-sm text-slate-500">No saved addresses yet.</p>
         ) : (
           <ul className="mt-4 space-y-3">

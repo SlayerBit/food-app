@@ -23,7 +23,7 @@ export const OrdersPage = () => {
 
   const load = () => {
     const endpoint = user?.role === "ADMIN" ? "/orders" : "/orders/my";
-    return api.get(endpoint).then((res) => setOrders(res.data.data));
+    return api.get(endpoint).then((res) => setOrders(res.data?.data || []));
   };
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const OrdersPage = () => {
     );
   }
 
-  if (error && !orders.length) {
+  if (error && !(orders || []).length) {
     return <p className="text-center text-red-600">{error}</p>;
   }
 
@@ -66,7 +66,7 @@ export const OrdersPage = () => {
       </p>
       {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
 
-      {!orders.length ? (
+      {!(orders || []).length ? (
         <div className="card p-10 text-center">
           <p className="text-slate-600">No orders yet.</p>
         </div>

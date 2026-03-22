@@ -22,7 +22,7 @@ export const HomePage = () => {
   if (loading) return <Loading />;
   if (error) return <ErrorState message={error} />;
 
-  if (!(restaurants || []).length){
+  if (!(restaurants || [])( || []).length){
     return (
       <div className="card mx-auto max-w-md p-10 text-center">
         <p className="text-lg font-medium text-slate-800">No restaurants yet</p>

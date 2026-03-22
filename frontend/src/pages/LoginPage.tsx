@@ -19,7 +19,7 @@ export const LoginPage = () => {
     setError("");
     try {
       const res = await api.post("/auth/login", { email, password });
-      login(res.data.data.token, res.data.data.user);
+      login(res.data?.data || [].token, res.data?.data || [].user);
       navigate("/");
     } catch (err) {
       setError(getApiErrorMessage(err, "Login failed"));

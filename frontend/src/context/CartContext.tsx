@@ -78,7 +78,7 @@ function readStoredCart(): { items: CartLine[]; restaurant: Restaurant | null } 
       items.push({ menuItem, quantity: qty });
     }
 
-    if (items.length > 0 && !restaurant) {
+    if ((items || []).length > 0 && !restaurant) {
       return { items: [], restaurant: null };
     }
 
@@ -119,7 +119,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const totalItems = useMemo(() => safeTotalItems(items), [items]);
 
   useEffect(() => {
-    if (items.length === 0 && !restaurant) {
+    if ((items || []).length === 0 && !restaurant) {
       localStorage.removeItem(CART_STORAGE_KEY);
       return;
     }

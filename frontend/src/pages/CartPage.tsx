@@ -22,7 +22,7 @@ export const CartPage = () => {
 
   const lines = Array.isArray(items) ? items : [];
 
-  if (lines.length === 0) {
+  if ((lines || []).length === 0) {
     return (
       <div className="mx-auto max-w-2xl">
         <h1 className="mb-2 text-3xl font-bold tracking-tight text-slate-900">Your cart</h1>
@@ -47,7 +47,7 @@ export const CartPage = () => {
 
   const placeOrder = async () => {
     if (!user) return navigate("/login");
-    if (!restaurant || lines.length === 0) return;
+    if (!restaurant || (lines || []).length === 0) return;
     setLoading(true);
     setError("");
     try {
@@ -67,7 +67,7 @@ export const CartPage = () => {
     }
   };
 
-  const canCheckout = Boolean(restaurant && lines.length && user);
+  const canCheckout = Boolean(restaurant && (lines || []).length && user);
 
   return (
     <div className="mx-auto max-w-2xl">
