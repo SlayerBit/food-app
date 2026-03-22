@@ -14,7 +14,7 @@ export const HomePage = () => {
   useEffect(() => {
     api
       .get("/restaurants/public")
-      .then((res) => setRestaurants(res.data.data))
+      .then((res) => setRestaurants(res.data?.data || []))
       .catch((e) => setError(getApiErrorMessage(e, "Failed to load restaurants")))
       .finally(() => setLoading(false));
   }, []);
@@ -22,7 +22,7 @@ export const HomePage = () => {
   if (loading) return <Loading />;
   if (error) return <ErrorState message={error} />;
 
-  if (!restaurants.length) {
+  if (!(restaurants || []).length){
     return (
       <div className="card mx-auto max-w-md p-10 text-center">
         <p className="text-lg font-medium text-slate-800">No restaurants yet</p>
@@ -35,7 +35,7 @@ export const HomePage = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Order food you love</h1>
-        <p className="mt-2 text-slate-600">Top restaurants in your area — fast delivery.</p>
+        <p className="mt-2 text-slate-600">Top restaurants in your area ??? fast delivery.</p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {restaurants.map((r) => (
