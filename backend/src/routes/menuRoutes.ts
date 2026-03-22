@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { menuController } from "../controllers/menuController";
+import { asyncHandler } from "../middleware/asyncHandler";
+import { authenticate, authorize } from "../middleware/authMiddleware";
+
+const router = Router();
+
+// Public menu read — explicit path so it never competes with protected routes
+router.get("/public/:restaurantId", asyncHandler(menuController.listByRestaurant));
+router.post("/", authenticate, authorize("ADMIN"), asyncHandler(menuController.create));
+router.put("/:id", authenticate, authorize("ADMIN"), asyncHandler(menuController.update));
+router.delete("/:id", authenticate, authorize("ADMIN"), asyncHandler(menuController.remove));
+
+export default router;
