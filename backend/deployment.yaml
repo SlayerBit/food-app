@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: food-backend
+  template:
+    metadata:
+      labels:
+        app: food-backend
+    spec:
+      containers:
+      - name: food-backend
+        image: asia-south1-docker.pkg.dev/food-app-backend-01/food-repo/food-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: food-backend-secret
+              key: JWT_SECRET
