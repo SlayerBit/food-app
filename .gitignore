@@ -29,3 +29,4 @@ tmp/
 
 # Coverage
 coverage/
+backend/*.sql
